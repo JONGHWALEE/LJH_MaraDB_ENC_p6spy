@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<!-- <setting name="mapUnderscoreToCamelCase" value="true" /> -->
+		<setting name="callSettersOnNulls" value="true" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="commonMap" type="kr.infotake.cmm.CommonMap" />
+		<typeAlias alias="hashMap" type="java.util.HashMap" />
+		<typeAlias alias="map" type="java.util.Map" />
+		<typeAlias alias="list" type="java.util.List" />
+	</typeAliases>
+</configuration>

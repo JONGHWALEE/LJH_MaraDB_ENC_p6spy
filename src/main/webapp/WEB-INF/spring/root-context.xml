@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/jdbc
+                           http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+                           http://www.mybatis.org/schema/mybatis-spring
+                           http://www.mybatis.org/schema/mybatis-spring-1.2.xsd">
+
+    <!-- DataSource 설정 (DBCP2) -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.p6spy.engine.spy.P6SpyDriver" />
+    	<property name="url" value="jdbc:p6spy:mariadb://192.168.0.11:3306/mysql" />
+        <property name="username" value="root" />
+        <property name="password" value="dlwhdghk1!" />
+        
+        <!-- 커넥션 풀 설정 -->
+        <property name="initialSize" value="5" />
+        <property name="maxTotal" value="10" />
+        <property name="maxIdle" value="5" />
+        <property name="minIdle" value="2" />
+        <property name="maxWaitMillis" value="10000" />
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:sqlmap/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:sqlmap/mapper/**/*.xml" />
+    </bean>
+    
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+    <!-- JdbcTemplate 설정 -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 트랜잭션 매니저 설정 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+</beans>

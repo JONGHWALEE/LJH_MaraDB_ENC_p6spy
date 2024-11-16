@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.vinus.minimalworks.mappers._mnmwsAdm.LoginMapper">
+	
+	<select id="loginCheck" parameterType="map" resultType="commonMap">
+		SELECT
+			SEQ,
+			USER_ID,
+			USER_NM,
+			USER_PASS,
+			USER_LVL,	
+			USER_TYPE,	
+			LOGIN_LAST,
+			LOGIN_ERR_CNT,
+			REG_DT,
+			REG_IP,
+			MOD_DT,
+			MOD_IP,
+			MOD_MSG
+		FROM SYS_MEMBER
+		WHERE USER_ID = #{userId}
+	</select>
+	
+</mapper>
