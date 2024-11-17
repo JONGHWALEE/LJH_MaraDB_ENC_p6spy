@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
-    <!-- Appenders (로그 출력 처리기 설정) -->
-    <Appenders>
-        <!-- 콘솔에 로그를 출력하는 Appender 정의 -->
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level - %msg%n" />
-        </Console>
-    </Appenders>
+<Configuration status="WARN"
+	xmlns="http://logging.apache.org/log4j/2.0/config">
+	<!-- Appenders (로그 출력 처리기 설정) -->
+	<Appenders>
+		<!-- 콘솔에 로그를 출력하는 Appender 정의 -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level - %msg%n" />
+		</Console>
+	</Appenders>
 
-    <!-- Loggers (로그 기록 설정) -->
-    <Loggers>
-        <!-- 애플리케이션의 로그 레벨 설정 -->
-        <Logger name="kr.infotake" level="error" additivity="false" />
-        
-        <!-- 6spy 로그를 debug 레벨로 출력 -->
-        <Logger name="com.github.jeziellago.spyjdbc" level="debug">
-            <AppenderRef ref="Console"/>
-        </Logger>
-        
-       <!-- 루트 로거 설정 -->
-        <Root level="debug">
-            <AppenderRef ref="Console" />
-        </Root>
-    </Loggers>
+	<!-- Loggers (로그 기록 설정) -->
+	<Loggers>
+		<!-- 애플리케이션의 로그 레벨 설정 -->
+		<Logger name="kr.infotake" level="error" additivity="false" />
+
+		<!-- 6spy 로그를 debug 레벨로 출력 -->
+		<Logger name="p6spy" level="debug" additivity="false">
+			<AppenderRef ref="Console">
+			</AppenderRef>
+		</Logger>
+
+		<!-- 루트 로거 설정 -->
+		<Root level="debug">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
 </Configuration>
